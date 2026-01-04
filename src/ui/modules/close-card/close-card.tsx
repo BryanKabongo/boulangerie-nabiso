@@ -43,48 +43,23 @@ export const CloseCard = ({
       },
       body: JSON.stringify({
         updateType: "Status",
+        cardnumber: cardNumber + 1,
+        customerid: customerid,
+        extensionid: extensionid,
       }),
     });
 
     if (closeCard.status === 200) {
-      const addCard = await fetch(`/api/card`, {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          cardnumber: cardNumber + 1,
-          customerid: customerid,
-          extensionid: extensionid,
-        }),
+      toast({
+        title: "Cloturé",
+        description: (
+          <Typography variant="body-sm">
+            La carte a été cloturée avec succès
+          </Typography>
+        ),
       });
-
-      if (addCard.status === 200) {
-        toast({
-          title: "Cloturé",
-          description: (
-            <Typography variant="body-sm">
-              La carte a été cloturée avec succès
-            </Typography>
-          ),
-        });
-        router.refresh();
-        stopLoading();
-      } else {
-        toast({
-          variant: "destructive",
-          title: "Erreur",
-          description: (
-            <Typography variant="body-sm">
-              Une erreur est survenue durant le processus de cloture. Veuillez
-              récommencer.
-            </Typography>
-          ),
-        });
-        router.refresh();
-        stopLoading();
-      }
+      router.refresh();
+      stopLoading();
     } else {
       toast({
         variant: "destructive",

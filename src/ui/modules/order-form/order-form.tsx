@@ -193,7 +193,7 @@ export const OrderForm = ({ customers, users }: Props) => {
   };
 
   async function onSubmit(values: z.infer<typeof OrdersFormFieldsType>) {
-    if (isLoading) return; // Empêche la double soumission
+    if (isLoading) return;
     startLoading();
     const {
       amount,

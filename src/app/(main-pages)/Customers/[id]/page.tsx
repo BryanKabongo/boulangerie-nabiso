@@ -74,6 +74,7 @@ export default async function Home({ params }: { params: { id: string } }) {
       role: true,
     },
   });
+  console.log(customer?.card!);
 
   return (
     <main className="w-full flex flex-col">
